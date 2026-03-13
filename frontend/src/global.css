@@ -1,0 +1,16 @@
+body { 
+    font-family: sans-serif;
+line-height: 1.7;
+margin: 0;
+min-width: 320px;
+
+
+}
+.container {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+img{
+    max-width: 100%;
+    display: block;
+}
