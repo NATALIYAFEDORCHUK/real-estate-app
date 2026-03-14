@@ -12,9 +12,14 @@ async function bootstrap() {
     }),
   );
   app.enableCors({
-    origin: ['https://real-estate-app-sable-two.vercel.app'], // Allow requests from this origin
-    credentials: true, // Allow cookies to be sent with requests
+    origin: [
+      'http://localhost:5173',
+      'https://real-estate-app-sable-two.vercel.app',
+    ],
+    credentials: true,
   });
-  await app.listen(process.env.PORT ?? 3000);
+  // await app.listen(process.env.PORT ?? 3000);
+  const port = process.env.PORT ?? 3000;
+  await app.listen(port, '0.0.0.0');
 }
 void bootstrap();
