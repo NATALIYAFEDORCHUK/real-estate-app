@@ -12,7 +12,7 @@ async function bootstrap() {
     }),
   );
   app.enableCors({
-    origin: 'http://localhost:5173', // Allow requests from this origin
+    origin: ['https://real-estate-app-sable-two.vercel.app'], // Allow requests from this origin
     credentials: true, // Allow cookies to be sent with requests
   });
   await app.listen(process.env.PORT ?? 3000);
