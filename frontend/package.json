@@ -14,6 +14,7 @@
     "@types/yup": "^0.29.14",
     "axios": "^1.13.5",
     "formik": "^2.4.9",
+    "modern-normalize": "^3.0.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-redux": "^9.2.0",
