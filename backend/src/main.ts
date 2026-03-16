@@ -15,6 +15,8 @@ async function bootstrap() {
     origin: [
       'http://localhost:5173',
       'https://real-estate-app-sable-two.vercel.app',
+      'htpps://real-estate-app-f6wy-git-main-nataliiafedorchuks-projects.vercel.app',
+      'https://real-estate-app-f6wy-a92i1wbkh-nataliiafedorchuks-projects.vercel.app',
     ],
     credentials: true,
   });
