@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../store/store";
 import styles from "./OpenDeals.module.css";
+import { api } from "../../services/api";
 
 interface Deal {
   id: number;
@@ -21,37 +22,26 @@ const OpenDeals: React.FC = () => {
 
   const { token } = useSelector((state: RootState) => state.auth);
 
+
   useEffect(() => {
     const fetchDeals = async () => {
+      setLoading(true);
+      setError(null);
+
       try {
-        setLoading(true);
-        setError(null);
-
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/properties`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch deals");
-        }
-
-        const data: Deal[] = await response.json();
+        const { data } = await api.get<Deal[]>("/properties");
         setDeals(data);
       } catch (err: unknown) {
-        if (err instanceof Error) {
-          setError(err.message);
-        } else {
-          setError("Something went wrong");
-        }
+        if (err instanceof Error) setError(err.message);
+        else setError("Something went wrong");
       } finally {
         setLoading(false);
       }
     };
 
-    fetchDeals();
+    if (token) fetchDeals(); // робимо запит лише якщо токен є
   }, [token]);
+
 
   if (loading) return <div className={styles.openDeals}>Loading deals...</div>;
   if (error) return <div className={styles.openDealsError}>{error}</div>;
@@ -104,3 +94,36 @@ const OpenDeals: React.FC = () => {
 };
 
 export default OpenDeals;
+
+  // useEffect(() => {
+  //   const fetchDeals = async () => {
+  //     try {
+  //       setLoading(true);
+  //       setError(null);
+
+  //       const response = await fetch(`${import.meta.env.VITE_API_URL}/properties`, {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+
+  //         },
+  //       });
+
+  //       if (!response.ok) {
+  //         throw new Error("Failed to fetch deals");
+  //       }
+
+  //       const data: Deal[] = await response.json();
+  //       setDeals(data);
+  //     } catch (err: unknown) {
+  //       if (err instanceof Error) {
+  //         setError(err.message);
+  //       } else {
+  //         setError("Something went wrong");
+  //       }
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchDeals();
+  // }, [token]);
