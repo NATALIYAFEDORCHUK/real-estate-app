@@ -26,8 +26,9 @@ interface AuthState {
 }
 
 const token = localStorage.getItem("token");
+const user = localStorage.getItem("user");
 const initialState: AuthState = {
-  user: token ? { id: 0, email: "" } : null,
+  user: user ? JSON.parse(user) : null,
   token,
   loading: false,
   error: null,
@@ -78,6 +79,7 @@ const authSlice = createSlice({
       state.user = null;
       state.token = null;
       localStorage.removeItem("token");
+      localStorage.removeItem("user");
     },
   },
   extraReducers: (builder) => {
@@ -88,9 +90,13 @@ const authSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, action) => {
         state.loading = false;
-        state.user = { id: action.payload.user, email: action.payload.email };
+        const user = { id: action.payload.user, email: action.payload.email };
+
+        state.user = user;
         state.token = action.payload.token;
+        
         localStorage.setItem("token", action.payload.token);
+        localStorage.setItem("user", JSON.stringify(user));
       })
       .addCase(login.rejected, (state, action) => {
         state.loading = false;
@@ -102,9 +108,13 @@ const authSlice = createSlice({
       })
       .addCase(register.fulfilled, (state, action) => {
         state.loading = false;
-        state.user = { id: action.payload.user, email: action.payload.email };
-        state.token = action.payload.token;
-        localStorage.setItem("token", action.payload.token);
+        const user = { id: action.payload.user, email: action.payload.email };
+
+state.user = user;
+state.token = action.payload.token;
+
+localStorage.setItem("token", action.payload.token);
+localStorage.setItem("user", JSON.stringify(user));
       })
       .addCase(register.rejected, (state, action) => {
         state.loading = false;

@@ -1,9 +1,9 @@
 import { Routes, Route } from "react-router-dom";
-import Login from "./components/Login/Login";
+import Login from "./components/auth/Login";
 import Home from "./components/Home";
 import OpenDeals from "./components/OpenDeals/OpenDeals";
 import Header from "./components/Header/Header";
-import Register from "./components/Login/Register";
+import Register from "./components/auth/Register";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
 
