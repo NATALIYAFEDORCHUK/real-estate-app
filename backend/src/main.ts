@@ -14,13 +14,12 @@ async function bootstrap() {
   app.enableCors({
     origin: [
       'http://localhost:5173',
-      'https://real-estate-app-sable-two.vercel.app',
-      'htpps://real-estate-app-f6wy-git-main-nataliiafedorchuks-projects.vercel.app',
+      'https://real-estate-app-f6wy-git-main-nataliiafedorchuks-projects.vercel.app',
       'https://real-estate-app-f6wy-a92i1wbkh-nataliiafedorchuks-projects.vercel.app',
     ],
+    methods: 'GET,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
-  // await app.listen(process.env.PORT ?? 3000);
   const port = process.env.PORT ?? 3000;
   await app.listen(port, '0.0.0.0');
 }
