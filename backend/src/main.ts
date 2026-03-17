@@ -15,6 +15,7 @@ async function bootstrap() {
     origin: [
       'http://localhost:5173',
       'https://real-estate-app-f6wy-git-main-nataliiafedorchuks-projects.vercel.app',
+      'https://real-estate-app-0c4x.onrender.com',
     ],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
