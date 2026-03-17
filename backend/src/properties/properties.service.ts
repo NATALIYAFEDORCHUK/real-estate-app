@@ -9,4 +9,9 @@ export class PropertiesService {
   async findAll(): Promise<Property[]> {
     return this.prisma.property.findMany();
   }
+  async findAllByUser(userId: number): Promise<Property[]> {
+    return this.prisma.property.findMany({
+      where: { ownerId: userId },
+    });
+  }
 }

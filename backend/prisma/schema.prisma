@@ -1,15 +1,18 @@
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
+
 datasource db {
-    provider = "postgresql"
-    url = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
+
 model User {
-  id           Int       @id @default(autoincrement())
-  email        String    @unique
+  id           Int           @id @default(autoincrement())
+  email        String        @unique
   password     String
-  createdAt    DateTime  @default(now())
+  createdAt    DateTime      @default(now())
+  properties   Property[]
   applications Application[]
 }
 
@@ -26,7 +29,7 @@ model Application {
 }
 
 model Property {
-  id           Int @id @default(autoincrement())
+  id           Int    @id @default(autoincrement())
   title        String
   imageUrl     String
   totalPrice   Int
@@ -34,4 +37,6 @@ model Property {
   soldPercent  Int
   ticketPrice  Int
   daysLeft     Int
+  ownerId      Int
+  owner        User   @relation(fields: [ownerId], references: [id])
 }

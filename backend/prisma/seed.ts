@@ -3,13 +3,17 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-  // Перевіряємо, чи є вже угоди
-  const existing = await prisma.property.count();
-  if (existing > 0) {
-    console.log(`Seed skipped: ${existing} properties already exist.`);
-    return;
-  }
+  await prisma.property.deleteMany();
+  await prisma.user.deleteMany();
 
+  const user = await prisma.user.create({
+    data: {
+      email: 'test@gmail.com',
+      password: '123456',
+    },
+  });
+  const userId = user.id; // Припустимо, що користувач з id=1 існує.
+  //  Ви можете створити його окремо або додати логіку для створення користувача, якщо його немає.
   // Якщо немає, додаємо початкові дані
   await prisma.property.createMany({
     data: [
@@ -22,6 +26,7 @@ async function main() {
         soldPercent: 75,
         ticketPrice: 60000,
         daysLeft: 150,
+        ownerId: userId,
       },
       {
         title: 'HHHR Tower',
@@ -32,6 +37,7 @@ async function main() {
         soldPercent: 75,
         ticketPrice: 60000,
         daysLeft: 150,
+        ownerId: userId,
       },
       {
         title: 'Ocean Peaks',
@@ -42,6 +48,7 @@ async function main() {
         soldPercent: 75,
         ticketPrice: 60000,
         daysLeft: 150,
+        ownerId: userId,
       },
       {
         title: 'Al Yaqoub Tower',
@@ -52,6 +59,7 @@ async function main() {
         soldPercent: 75,
         ticketPrice: 60000,
         daysLeft: 150,
+        ownerId: userId,
       },
     ],
   });
