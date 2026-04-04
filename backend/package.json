@@ -20,7 +20,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "prisma": {
-    "seed": "ts-node dist/prisma/seed.js",
+    "seed": "ts-node prisma/seed.js",
     "schema": "prisma/schema.prisma"
   },
   "dependencies": {
