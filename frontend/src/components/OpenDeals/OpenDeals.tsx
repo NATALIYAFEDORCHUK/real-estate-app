@@ -22,6 +22,11 @@ const OpenDeals: React.FC = () => {
 
   const { token } = useSelector((state: RootState) => state.auth);
 
+  useEffect(() => {
+    api.get("/properties").then(res => {
+      console.log("DATA FROM API:", res.data);
+    });
+  }, []);
 
   useEffect(() => {
     const fetchDeals = async () => {
@@ -95,6 +100,111 @@ const OpenDeals: React.FC = () => {
 
 export default OpenDeals;
 
+
+//?=========================
+// import React, { useEffect, useState } from "react";
+// // import { useSelector } from "react-redux";
+// // import type { RootState } from "../../store/store";
+// import styles from "./OpenDeals.module.css";
+// import { api } from "../../services/api";
+
+// interface Property {
+//   id: number;
+//   imageUrl: string;
+//   title: string;
+//   totalPrice: number;
+//   ticketPrice: number;
+//   yieldPercent: number;
+//   daysLeft: number;
+//   soldPercent: number;
+// }
+
+// const OpenDeals: React.FC = () => {
+//   const [properties, setProperties] = useState<Property[]>([]);
+//   const [loading, setLoading] = useState<boolean>(false);
+//   const [error, setError] = useState<string | null>(null);
+
+//   // const { token } = useSelector((state: RootState) => state.auth);
+// //?=======================
+//   useEffect(() => {
+//     api.get("/properties").then(res => {
+//       console.log("DATA FROM API:", res.data);
+//     });
+//   }, []);
+//   //?===============
+//   useEffect(() => {
+//     const fetchDeals = async () => {
+//       setLoading(true);
+//       setError(null);
+
+//       try {
+//         const { data } = await api.get<Property[]>("/properties");
+//         console.log("FETCHED:", data);
+//         setProperties(data);
+//       } catch (err: unknown) {
+//         if (err instanceof Error) setError(err.message);
+//         else setError("Something went wrong");
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+
+//      fetchDeals(); // робимо запит лише якщо токен є
+//   }, []);
+
+
+//   if (loading) return <div className={styles.openDeals}>Loading deals...</div>;
+//   if (error) return <div className={styles.openDealsError}>{error}</div>;
+
+//   return (
+//     <div className={styles.openDeals}>
+//       {properties.length === 0 ? (
+//         <p>No deals available</p>
+//       ) : (
+//         <>
+//           <h1 className={styles.title}>Open Deals</h1>
+//           <div className={styles.dealsGrid}>
+//             {properties.map((property) => (
+//               <div key={property.id} className={styles.dealCard}>
+//                 <div className={styles.imagesBox}>
+//                   <img
+//                     src={property.imageUrl}
+//                     alt={property.title}
+//                     className={styles.dealImage}
+//                   />
+//                 </div>
+
+//                 <div className={styles.contentBox}>
+//                   <h2 className={styles.dealTitle}>{property.title}</h2>
+//                   <div className={styles.detailsBox}>
+//                     <div className={styles.price}>
+//                       <p className={styles.text}>
+//                         {property.totalPrice.toLocaleString()} Dhs
+//                       </p>
+//                       <p className={styles.text}>
+//                         Ticket - {property.ticketPrice} Dhs
+//                       </p>
+//                     </div>
+//                     <div className={styles.price}>
+//                       <p className={styles.text}>Yield: {property.yieldPercent}%</p>
+//                       <p className={styles.text}>Days Left: {property.daysLeft}</p>
+//                     </div>
+//                     <div className={styles.price}>
+//                       <p className={styles.text}>Sold: {property.soldPercent}%</p>
+//                     </div>
+//                   </div>
+//                 </div>
+//               </div>
+//             ))}
+//           </div>
+//         </>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default OpenDeals;
+//?=================
   // useEffect(() => {
   //   const fetchDeals = async () => {
   //     try {
