@@ -6,14 +6,6 @@ import { PrismaService } from '../../prisma/prisma.service';
 export class PropertiesService {
   constructor(private prisma: PrismaService) {}
 
-  // async findAll(): Promise<Property[]> {
-  //   return this.prisma.property.findMany();
-  // }
-
-  // async findAll(): Promise<Property[]> {
-  //   return this.prisma.property.findMany();
-  // }
-
   async findAll() {
     const data = await this.prisma.property.findMany();
     console.log('PROPERTIES FROM DB:', data);

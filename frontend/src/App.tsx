@@ -6,20 +6,25 @@ import Header from "./components/Header/Header";
 import Register from "./components/auth/Register";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
-
 function App() {
   return (
     <>
-    <Header />
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/properties" element={<ProtectedRoute><OpenDeals /></ProtectedRoute>} />
+        <Route
+          path="/properties"
+          element={
+            <ProtectedRoute>
+              <OpenDeals />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </>
   );
 }
 
 export default App;
-

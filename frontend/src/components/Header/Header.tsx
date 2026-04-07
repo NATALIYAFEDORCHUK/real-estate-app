@@ -14,10 +14,10 @@ const Header: React.FC = () => {
 
   const isOpenDealsPage = location.pathname === "/properties";
 
-const handleLogout = () => {
-  dispatch(logout());
-  navigate("/");
-}
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/");
+  };
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -27,10 +27,7 @@ const handleLogout = () => {
         <nav className={styles.nav}>
           {token ? (
             isOpenDealsPage ? (
-              <button
-                className={styles.button}
-                onClick={handleLogout}
-              >
+              <button className={styles.button} onClick={handleLogout}>
                 Sign Out
               </button>
             ) : (
@@ -41,10 +38,7 @@ const handleLogout = () => {
                 >
                   Open Deals
                 </button>
-                <button
-                  className={styles.button}
-                  onClick={handleLogout}
-                >
+                <button className={styles.button} onClick={handleLogout}>
                   Sign Out
                 </button>
               </>

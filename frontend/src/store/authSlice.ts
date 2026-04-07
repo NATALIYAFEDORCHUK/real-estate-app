@@ -94,7 +94,7 @@ const authSlice = createSlice({
 
         state.user = user;
         state.token = action.payload.token;
-        
+
         localStorage.setItem("token", action.payload.token);
         localStorage.setItem("user", JSON.stringify(user));
       })
@@ -110,11 +110,11 @@ const authSlice = createSlice({
         state.loading = false;
         const user = { id: action.payload.user, email: action.payload.email };
 
-state.user = user;
-state.token = action.payload.token;
+        state.user = user;
+        state.token = action.payload.token;
 
-localStorage.setItem("token", action.payload.token);
-localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("token", action.payload.token);
+        localStorage.setItem("user", JSON.stringify(user));
       })
       .addCase(register.rejected, (state, action) => {
         state.loading = false;
